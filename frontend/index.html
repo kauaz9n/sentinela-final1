@@ -1,364 +1,313 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
 
-    <title>Sistema Hospitalar</title>
+<style>
+/* =====================================================
+   SISTEMA HOSPITALAR — TEMA PREMIUM / LUXO
+   ===================================================== */
 
-    <style>
-        /* ===== RESET ===== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-        /* ===== PÁGINA ===== */
-        body {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-            font-family: "Segoe UI", Arial, sans-serif;
+  font-family: "Segoe UI", Arial, Helvetica, sans-serif;
 
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(13, 148, 136, 0.08),
-                    rgba(37, 99, 235, 0.08)
-                ),
-                #f4f8fb;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(0, 188, 212, 0.12), transparent 30%),
+    radial-gradient(circle at 80% 80%, rgba(30, 136, 229, 0.12), transparent 30%),
+    linear-gradient(135deg, #06121f 0%, #0b1f33 50%, #071421 100%);
 
-            color: #1e293b;
-        }
+  color: #172b3a;
+  overflow: hidden;
+}
 
-        /* ===== CARD ===== */
-        .container {
-            width: 400px;
-            padding: 42px 38px;
+/* Efeito decorativo no fundo */
+body::before {
+  content: "";
+  position: fixed;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
 
-            background: rgba(255, 255, 255, 0.97);
+  background: rgba(0, 188, 212, 0.06);
+  filter: blur(80px);
 
-            border-radius: 18px;
+  top: -200px;
+  left: -150px;
 
-            box-shadow:
-                0 20px 50px rgba(15, 23, 42, 0.12),
-                0 4px 12px rgba(15, 23, 42, 0.05);
+  pointer-events: none;
+}
 
-            border: 1px solid #e2e8f0;
+body::after {
+  content: "";
+  position: fixed;
+  width: 450px;
+  height: 450px;
+  border-radius: 50%;
 
-            text-align: center;
-        }
+  background: rgba(30, 136, 229, 0.07);
+  filter: blur(90px);
 
-        /* ===== ÍCONE ===== */
-        .icon {
-            width: 70px;
-            height: 70px;
+  bottom: -200px;
+  right: -150px;
 
-            margin: 0 auto 20px;
+  pointer-events: none;
+}
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
+/* =====================================================
+   CARD PRINCIPAL
+   ===================================================== */
 
-            background: linear-gradient(
-                135deg,
-                #0f4c81,
-                #0d9488
-            );
+.container {
+  position: relative;
+  width: 410px;
+  max-width: calc(100% - 40px);
 
-            border-radius: 50%;
+  padding: 45px 42px 42px;
 
-            color: white;
-            font-size: 34px;
+  background: rgba(255, 255, 255, 0.97);
 
-            box-shadow: 0 8px 20px rgba(13, 148, 136, 0.25);
-        }
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 22px;
 
-        /* ===== TÍTULO ===== */
-        h2 {
-            margin-bottom: 8px;
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.35),
+    0 10px 30px rgba(0, 0, 0, 0.15);
 
-            color: #0f4c81;
+  text-align: center;
 
-            font-size: 27px;
-            font-weight: 700;
-        }
+  backdrop-filter: blur(15px);
 
-        .subtitle {
-            margin-bottom: 30px;
+  animation: aparecer 0.6s ease-out;
+}
 
-            color: #64748b;
+/* Linha superior elegante */
+.container::before {
+  content: "";
+  position: absolute;
 
-            font-size: 14px;
-        }
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
 
-        /* ===== INPUTS ===== */
-        .input-group {
-            text-align: left;
-            margin-bottom: 17px;
-        }
+  width: 90px;
+  height: 4px;
 
-        .input-group label {
-            display: block;
+  background: linear-gradient(
+    90deg,
+    #00acc1,
+    #26c6da,
+    #1976d2
+  );
 
-            margin-bottom: 7px;
+  border-radius: 0 0 10px 10px;
+}
 
-            color: #334155;
+/* =====================================================
+   TÍTULO
+   ===================================================== */
 
-            font-size: 14px;
-            font-weight: 600;
-        }
+.container h2 {
+  margin-bottom: 32px;
 
-        .container input {
-            width: 100%;
+  color: #102a43;
 
-            padding: 14px 16px;
+  font-size: 25px;
+  font-weight: 700;
 
-            border: 1px solid #cbd5e1;
-            border-radius: 10px;
+  letter-spacing: -0.4px;
+}
 
-            background: #f8fafc;
+/* =====================================================
+   CAMPOS
+   ===================================================== */
 
-            color: #1e293b;
+.container input {
+  width: 100%;
+  height: 54px;
 
-            font-size: 15px;
+  margin-bottom: 16px;
+  padding: 0 17px;
 
-            outline: none;
+  border: 1px solid #d8e2ea;
+  border-radius: 12px;
 
-            transition: 0.25s ease;
-        }
+  background: #f7fafc;
 
-        .container input::placeholder {
-            color: #94a3b8;
-        }
+  color: #17324d;
 
-        .container input:focus {
-            border-color: #0d9488;
+  font-size: 15px;
 
-            background: #ffffff;
+  outline: none;
 
-            box-shadow:
-                0 0 0 3px rgba(13, 148, 136, 0.12);
-        }
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease,
+    transform 0.25s ease;
+}
 
-        /* ===== BOTÃO ===== */
-        button {
-            width: 100%;
+.container input::placeholder {
+  color: #8a9baa;
+}
 
-            padding: 14px;
-            margin-top: 8px;
+.container input:hover {
+  background: #ffffff;
+  border-color: #b9cad8;
+}
 
-            border: none;
-            border-radius: 10px;
+.container input:focus {
+  background: #ffffff;
+  border-color: #18a8c5;
 
-            background: linear-gradient(
-                135deg,
-                #0f4c81,
-                #0d9488
-            );
+  box-shadow:
+    0 0 0 4px rgba(24, 168, 197, 0.10),
+    0 5px 15px rgba(24, 168, 197, 0.08);
 
-            color: white;
+  transform: translateY(-1px);
+}
 
-            font-size: 16px;
-            font-weight: 600;
+/* =====================================================
+   BOTÃO
+   ===================================================== */
 
-            cursor: pointer;
+.container button {
+  width: 100%;
+  height: 54px;
 
-            box-shadow:
-                0 6px 15px rgba(13, 148, 136, 0.2);
+  margin-top: 8px;
 
-            transition: all 0.25s ease;
-        }
+  border: none;
+  border-radius: 12px;
 
-        button:hover {
-            transform: translateY(-2px);
+  background:
+    linear-gradient(
+      135deg,
+      #087f9c 0%,
+      #0797b5 50%,
+      #176fc1 100%
+    );
 
-            box-shadow:
-                0 9px 20px rgba(13, 148, 136, 0.3);
-        }
+  color: #ffffff;
 
-        button:active {
-            transform: translateY(0);
-        }
+  font-size: 15px;
+  font-weight: 700;
 
-        /* ===== MENSAGEM ===== */
-        #mensagem {
-            min-height: 20px;
+  letter-spacing: 0.3px;
 
-            margin-top: 18px;
+  cursor: pointer;
 
-            font-size: 14px;
-            font-weight: 500;
-        }
+  box-shadow:
+    0 10px 25px rgba(8, 127, 156, 0.25);
 
-        .erro {
-            color: #dc2626;
-        }
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+}
 
-        .sucesso {
-            color: #059669;
-        }
+.container button:hover {
+  transform: translateY(-2px);
 
-        /* ===== RODAPÉ ===== */
-        .footer {
-            margin-top: 25px;
+  filter: brightness(1.08);
 
-            color: #94a3b8;
+  box-shadow:
+    0 14px 30px rgba(8, 127, 156, 0.35);
+}
 
-            font-size: 12px;
-        }
+.container button:active {
+  transform: translateY(0);
 
-        /* ===== RESPONSIVIDADE ===== */
-        @media (max-width: 480px) {
-            .container {
-                width: calc(100% - 30px);
-                padding: 35px 25px;
-            }
+  box-shadow:
+    0 6px 15px rgba(8, 127, 156, 0.25);
+}
 
-            h2 {
-                font-size: 23px;
-            }
-        }
-    </style>
+/* =====================================================
+   ANIMAÇÃO
+   ===================================================== */
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* =====================================================
+   RESPONSIVIDADE
+   ===================================================== */
+
+@media (max-width: 500px) {
+
+  body {
+    padding: 20px;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 380px;
+
+    padding: 38px 28px 32px;
+
+    border-radius: 18px;
+  }
+
+  .container h2 {
+    font-size: 22px;
+    margin-bottom: 26px;
+  }
+
+  .container input,
+  .container button {
+    height: 52px;
+  }
+}
+</style>
+
 </head>
 
 <body>
+<div class="container">
+  <h2>🏥 KAUAZIN HOSPITAIS</h2>
+  <input id="usuario" placeholder="Usuário">
+  <input id="senha" type="password" placeholder="Senha">
+  <button onclick="login()">Entrar</button>
+</div>
 
-    <div class="container">
-
-        <div class="icon">
-            🏥
-        </div>
-
-        <h2>Sistema Hospitalar</h2>
-
-        <p class="subtitle">
-            Acesso ao sistema de atendimento
-        </p>
-
-        <form id="loginForm">
-
-            <div class="input-group">
-                <label for="usuario">Usuário</label>
-
-                <input
-                    type="text"
-                    id="usuario"
-                    placeholder="Digite seu usuário"
-                    autocomplete="username"
-                    required
-                >
-            </div>
-
-            <div class="input-group">
-                <label for="senha">Senha</label>
-
-                <input
-                    type="password"
-                    id="senha"
-                    placeholder="Digite sua senha"
-                    autocomplete="current-password"
-                    required
-                >
-            </div>
-
-            <button type="submit" id="btnLogin">
-                Entrar no sistema
-            </button>
-
-        </form>
-
-        <div id="mensagem"></div>
-
-        <div class="footer">
-            Sistema Hospitalar © 2026
-        </div>
-
-    </div>
-
-    <script>
-
-        
-        const form = document.getElementById("loginForm");
-        const usuario = document.getElementById("usuario");
-        const senha = document.getElementById("senha");
-        const mensagem = document.getElementById("mensagem");
-        const btnLogin = document.getElementById("btnLogin");
-
-        form.addEventListener("submit", async function(event) {
-
-            event.preventDefault();
-
-            mensagem.textContent = "";
-            mensagem.className = "";
-
-            btnLogin.disabled = true;
-            btnLogin.textContent = "Entrando...";
-
-            try {
-
-                const resposta = await fetch("http://localhost:3000/login", {
-                    method: "POST",
-
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-
-                    body: JSON.stringify({
-                        usuario: usuario.value,
-                        senha: senha.value
-                    })
-                });
-
-                const data = await resposta.json();
-
-                if (!resposta.ok) {
-                    throw new Error(
-                        data.mensagem || "Usuário ou senha inválidos."
-                    );
-                }
-
-                mensagem.textContent = "Login realizado com sucesso!";
-                mensagem.className = "sucesso";
-
-                /*
-                 * Redirecionamento de acordo com o tipo
-                 * de usuário retornado pelo servidor.
-                 */
-
-                if (data.tipo === "triagem") {
-                    window.location.href = "triagem.html";
-                }
-
-                else if (data.tipo === "medico") {
-                    window.location.href = "medico.html";
-                }
-
-                else if (data.tipo === "atendimento") {
-                    window.location.href = "atendimento.html";
-                }
-
-                else {
-                    throw new Error("Tipo de usuário não reconhecido.");
-                }
-
-            } catch (erro) {
-
-                console.error(erro);
-
-                mensagem.textContent =
-                    erro.message || "Erro ao realizar login.";
-
-                mensagem.className = "erro";
-
-                btnLogin.disabled = false;
-                btnLogin.textContent = "Entrar no sistema";
-            }
-        });
-    </script>
-
+<script>
+function login() {
+  fetch("/login", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({
+      usuario: usuario.value,
+      senha: senha.value
+    })
+  })
+  .then(r => r.json())
+  .then(data => {
+    if(data.tipo === "triagem") location.href = "triagem.html";
+    if(data.tipo === "medico") location.href = "medico.html";
+    if(data.tipo === "atendimento") location.href = "atendimento.html";
+  });
+}
+ 
+ 
+</script>
 </body>
 </html>
