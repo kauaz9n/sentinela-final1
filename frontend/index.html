@@ -42,44 +42,59 @@
                 );
 
             color: #172b3a;
-            overflow: hidden;
         }
 
         body::before {
             content: "";
             position: fixed;
+
             width: 500px;
             height: 500px;
+
             border-radius: 50%;
+
             background: rgba(0, 188, 212, 0.06);
+
             filter: blur(80px);
+
             top: -200px;
             left: -150px;
+
             pointer-events: none;
         }
 
         body::after {
             content: "";
             position: fixed;
+
             width: 450px;
             height: 450px;
+
             border-radius: 50%;
+
             background: rgba(30, 136, 229, 0.07);
+
             filter: blur(90px);
+
             bottom: -200px;
             right: -150px;
+
             pointer-events: none;
         }
 
         .container {
             position: relative;
+            z-index: 1;
+
             width: 410px;
             max-width: 100%;
+
             padding: 45px 42px 42px;
 
             background: rgba(255, 255, 255, 0.97);
 
             border: 1px solid rgba(255, 255, 255, 0.8);
+
             border-radius: 22px;
 
             box-shadow:
@@ -87,18 +102,19 @@
                 0 10px 30px rgba(0, 0, 0, 0.15);
 
             text-align: center;
+
             backdrop-filter: blur(15px);
 
             animation: aparecer 0.6s ease-out;
-
-            z-index: 1;
         }
 
         .container::before {
             content: "";
             position: absolute;
+
             top: 0;
             left: 50%;
+
             transform: translateX(-50%);
 
             width: 90px;
@@ -116,9 +132,12 @@
 
         .container h2 {
             margin-bottom: 32px;
+
             color: #102a43;
+
             font-size: 25px;
             font-weight: 700;
+
             letter-spacing: -0.4px;
         }
 
@@ -130,12 +149,15 @@
             padding: 0 17px;
 
             border: 1px solid #d8e2ea;
+
             border-radius: 12px;
 
             background: #f7fafc;
+
             color: #17324d;
 
             font-size: 15px;
+
             outline: none;
 
             transition:
@@ -156,6 +178,7 @@
 
         .container input:focus {
             background: #ffffff;
+
             border-color: #18a8c5;
 
             box-shadow:
@@ -185,6 +208,7 @@
 
             font-size: 15px;
             font-weight: 700;
+
             letter-spacing: 0.3px;
 
             cursor: pointer;
@@ -200,6 +224,7 @@
 
         .container button:hover:not(:disabled) {
             transform: translateY(-2px);
+
             filter: brightness(1.08);
 
             box-shadow:
@@ -220,6 +245,7 @@
 
         #mensagem {
             min-height: 20px;
+
             margin-top: 15px;
 
             font-size: 14px;
@@ -247,7 +273,6 @@
         }
 
         @media (max-width: 500px) {
-
             body {
                 padding: 20px;
             }
@@ -300,7 +325,6 @@
     </div>
 
     <script>
-
         async function login() {
 
             const usuarioInput = document.getElementById("usuario");
@@ -338,30 +362,27 @@
                     })
                 });
 
-                if (!resposta.ok) {
+                let data;
 
-                    let erro = "Erro ao fazer login.";
-
-                    try {
-
-                        const dadosErro = await resposta.json();
-
-                        if (dadosErro.mensagem) {
-                            erro = dadosErro.mensagem;
-                        }
-
-                        if (dadosErro.erro) {
-                            erro = dadosErro.erro;
-                        }
-
-                    } catch (e) {}
-
-                    throw new Error(erro);
+                try {
+                    data = await resposta.json();
+                } catch {
+                    throw new Error(
+                        "O servidor retornou uma resposta inválida."
+                    );
                 }
 
-                const data = await resposta.json();
+                if (!resposta.ok) {
+
+                    throw new Error(
+                        data.mensagem ||
+                        data.erro ||
+                        "Usuário ou senha inválidos."
+                    );
+                }
 
                 if (!data || !data.tipo) {
+
                     throw new Error(
                         "O servidor não retornou o tipo de usuário."
                     );
@@ -391,7 +412,8 @@
                 console.error("Erro no login:", erro);
 
                 mensagem.textContent =
-                    erro.message || "Não foi possível realizar o login.";
+                    erro.message ||
+                    "Não foi possível realizar o login.";
 
                 mensagem.className = "erro";
 
@@ -402,14 +424,13 @@
 
         document
             .getElementById("senha")
-            .addEventListener("keydown", function(event) {
+            .addEventListener("keydown", function (event) {
 
                 if (event.key === "Enter") {
                     login();
                 }
 
             });
-
     </script>
 
 </body>
